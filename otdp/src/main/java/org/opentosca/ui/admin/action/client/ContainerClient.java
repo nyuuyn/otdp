@@ -94,9 +94,9 @@ public class ContainerClient {
 		// same machine as the GUI Backend.
 		// TODO Move Container API port and path information to e.g. external
 		// properties file, should not be fixed in the code.
-		String host = ServletActionContext.getRequest().getServerName();
-		ContainerClient.BASEURI = UriBuilder.fromUri(
-				"http://" + host + ":1337/containerapi").build();
+		// String host = ServletActionContext.getRequest().getServerName();
+		// ContainerClient.BASEURI = UriBuilder.fromUri(
+		// "http://" + host + ":1337/containerapi").build();
 
 	}
 
@@ -591,15 +591,20 @@ public class ContainerClient {
 	}
 
 	public List<String> uploadCSARDueURL(String urlToUpload) {
-		
-		System.out.println("Try to send the URL to the ContainerAPI: " + ContainerClient.URLencode(urlToUpload));
-		
+
+		System.out.println("Try to send the URL to the ContainerAPI: "
+				+ urlToUpload);
+
 		ArrayList<String> result = new ArrayList<String>();
 
-		ClientResponse resp = this.getBaseService().path("CSARs").queryParam("url", urlToUpload)
-				.post(ClientResponse.class);
+		ClientResponse resp = this.getBaseService().path("CSARs")
+				.queryParam("url", urlToUpload).post(ClientResponse.class);
 
 		if (!resp.getClientResponseStatus().equals(Status.OK)) {
+			System.out.println("Request to "
+					+ this.getBaseService().path("CSARs")
+							.queryParam("url", urlToUpload).getURI()
+					+ " returned with error:");
 			System.out.println("Error occurred while uploading CSAR from URL "
 					+ urlToUpload + ", Server returned: "
 					+ resp.getClientResponseStatus());
@@ -607,6 +612,7 @@ public class ContainerClient {
 					+ resp.getClientResponseStatus());
 		} else {
 			result.add("Created");
+			result.add(resp.getHeaders().get("Location").get(0));
 		}
 		return result;
 	}
