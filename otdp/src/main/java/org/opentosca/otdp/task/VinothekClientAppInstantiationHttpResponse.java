@@ -6,7 +6,9 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
@@ -16,6 +18,7 @@ public class VinothekClientAppInstantiationHttpResponse implements
 		HttpServletResponse {
 
 	private PrintWriter writer = new PrintWriter(new ByteArrayOutputStream());
+	private Map<String, String> dummyHeaderMap = new HashMap<String, String>();
 
 	@Override
 	public void flushBuffer() throws IOException {
@@ -108,8 +111,7 @@ public class VinothekClientAppInstantiationHttpResponse implements
 
 	@Override
 	public void addHeader(String arg0, String arg1) {
-		// TODO Auto-generated method stub
-
+		this.dummyHeaderMap.put(arg0, arg1);
 	}
 
 	@Override
@@ -205,13 +207,13 @@ public class VinothekClientAppInstantiationHttpResponse implements
 	@Override
 	public void setCharacterEncoding(String charset) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setContentLengthLong(long len) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -222,8 +224,7 @@ public class VinothekClientAppInstantiationHttpResponse implements
 
 	@Override
 	public String getHeader(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.dummyHeaderMap.get(name);
 	}
 
 	@Override

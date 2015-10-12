@@ -22,8 +22,9 @@
 	<h4>CSAR Upload:</h4>
 
 	<p>
-	<form action="." method="post" enctype="multipart/form-data">
-		SSHPrivateKey: <input type="text" name="sshPrivateKey"value="${it.sshPrivateKey}" /><br /> 
+	
+	<form id="deployAndInstantiateForm" action="." method="post" enctype="multipart/form-data">
+		SSHPrivateKey: <textarea form="deployAndInstantiateForm" name="sshPrivateKey" rows="1"></textarea><br /> 
 		KeyPairName: <input type="text" name="keyPairName" value="${it.keyPairName}" /><br />
 		AccessKey: <input type="text" name="accessKey" value="${it.accessKey}" /><br />
 		RegionEndpoint: <input type="text" name="regionEndpoint" value="${it.regionEndpoint}" /><br /> 

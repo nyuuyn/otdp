@@ -250,17 +250,11 @@ public class DeployProvisionTask implements Runnable {
 					e.printStackTrace();
 				}
 
-				// check with callbackmanager
-				String callbackId = null;
-				try {
-					// fetch callbackId
-					callbackId = vinoAppInstantiationResponse.getWriter()
-							.toString().split("\\?")[1].split("=")[1];
+				// fetch callbackId
+				String callbackId = vinoAppInstantiationResponse
+						.getHeader("callbackId");
 
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				// check with callbackmanager
 				for (ApplicationInstance instance : CallbackManager
 						.getAllInstances()) {
 
@@ -285,14 +279,8 @@ public class DeployProvisionTask implements Runnable {
 						break;
 					}
 				}
-
 			}
-
 		}
-
-		// find buildplan
-		// instantiate
-		// publish app endpoint
 	}
 
 	private String replaceInputData(String xml)

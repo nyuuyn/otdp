@@ -63,7 +63,7 @@ public class MainResource {
 		}
 		try {
 			URL csarURL = new URL(csarAddress);
-			TaskState newTask = new TaskState(csarURL, otdpUrl, sshPrivateKey, keyPairName, accesKey, regionEndpoint, secretKey);
+			TaskState newTask = new TaskState(csarURL, otdpUrl, sshPrivateKey.trim(), keyPairName, accesKey, regionEndpoint, secretKey);
 			Tasks.getInstance().tasks.add(newTask);
 
 			new Thread(new DeployProvisionTask(newTask)).start();

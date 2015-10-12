@@ -97,6 +97,8 @@ public class ApplicationInstantiationServlet extends HttpServlet {
 		// Store application instance
 		CallbackManager.addInstance(applicationInstance);
 		
+		response.addHeader("callbackId", applicationInstance.getCallbackId());
+		
 		// Returning URL to poll for result
 		response.getWriter().append(self + "/CallbackStatus?callbackId=" + applicationInstance.getCallbackId());
 	}
