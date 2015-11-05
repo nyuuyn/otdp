@@ -132,6 +132,8 @@ public class DeployProvisionTask implements Runnable {
 					.setCurrentMessage("Couldn't download CSAR from URL "
 							+ csarURL);
 			return;
+		} else {
+			this.currentState.setCSARDownloadedPath(csarDownloadTempPath);
 		}
 
 		ContainerClient client = ContainerClient.getInstance();

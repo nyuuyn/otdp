@@ -12,6 +12,7 @@ import org.opentosca.otdp.model.TaskState;
 import org.opentosca.ui.vinothek.CallbackEndpointServlet;
 import org.opentosca.ui.vinothek.CallbackManager;
 import org.opentosca.ui.vinothek.model.ApplicationInstance;
+import org.zeroturnaround.zip.commons.FileUtils;
 
 public class CallbackResource {
 
@@ -43,6 +44,7 @@ public class CallbackResource {
 				task.setApplicationEndpoint(instance.getEndpointUrl());				
 				task.setCurrentState(TaskState.State.CSARINSTANTIATED);
 				task.setCurrentMessage("Deployment and Provisioning finished, see endpoint for application");
+				FileUtils.deleteQuietly(task.getCSARDownloadedPath().toFile());
 				break;
 			}
 		}

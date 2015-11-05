@@ -35,6 +35,7 @@ public class TaskState {
 	private String callbackId;
 
 	private String applicationEndpoint;
+	private Path csarDownloadedTempPath;
 
 	public TaskState(URL csarURL, String otdpRequestUrl, String sshPrivateKey,
 			String keyPairName, String accessKey, String regionEndpoint,
@@ -166,6 +167,21 @@ public class TaskState {
 	 */
 	public void setApplicationEndpoint(String applicationEndpoint) {
 		this.applicationEndpoint = applicationEndpoint;
+	}
+
+	/**
+	 * @return the csarDownloadPath
+	 */
+	public Path getCSARDownloadedPath() {
+		return this.csarDownloadedTempPath;
+	}
+
+	/**
+	 * @param csarDownloadTempPath
+	 *            the path to the downloaded csar
+	 */
+	public void setCSARDownloadedPath(Path csarDownloadTempPath) {
+		this.csarDownloadedTempPath = csarDownloadTempPath;
 	}
 
 }
