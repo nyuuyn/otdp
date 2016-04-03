@@ -1,10 +1,25 @@
 package org.opentosca.otdp.data;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 /**
  * @author Kálmán Képes - kepeskn@studi.informatik.uni-stuttgart.de
  *
  */
 public class Configuration {
+
+	/**
+	 * The name of the properties file.
+	 */
+	private static final String PROPERTIES_FILENAME = "otdp.config.properties";
+
+	/**
+	 * The properties as loaded from the file system.
+	 */
+	private static Properties properties = new Properties();
 
 	private static String wineryAddress = "http://dev.winery.opentosca.org/winery/";
 	private static String containerAddress = "http://localhost:1337/containerapi";
@@ -12,13 +27,32 @@ public class Configuration {
 	// never
 	private static String sshPrivateKey = "";
 	private static String secretKey = "";
-	
+
 	private static String keyPairName = "KalleKeyPair";
 	private static String accessKey = "opentosca.kalman";
 
-	private static String regionEndpoint ="129.69.209.127";
+	private static String regionEndpoint = "129.69.209.127";
 
 	private Configuration() {
+	}
+
+	static {
+		InputStream inputStream = null;
+		try {
+			inputStream = Configuration.class.getClassLoader().getResourceAsStream(PROPERTIES_FILENAME);
+			if (inputStream == null) {
+				throw new FileNotFoundException();
+			}
+			properties.load(inputStream);
+		} catch (IOException e) {
+
+		} finally {
+			try {
+				inputStream.close();
+			} catch (IOException e) {
+
+			}
+		}
 	}
 
 	private static class SingletonHolder {
@@ -33,7 +67,7 @@ public class Configuration {
 	 * @return the wineryAddress
 	 */
 	public String getWineryAddress() {
-		return wineryAddress;
+		return this.properties.getProperty("otdp.winery.address");
 	}
 
 	/**
@@ -41,14 +75,14 @@ public class Configuration {
 	 *            the wineryAddress to set
 	 */
 	public void setWineryAddress(String wineryAddress) {
-		Configuration.wineryAddress = wineryAddress;
+		this.properties.setProperty("otdp.winery.address", containerAddress);
 	}
 
 	/**
 	 * @return the containerAddress
 	 */
 	public String getContainerAddress() {
-		return containerAddress;
+		return this.properties.getProperty("otdp.container.address");
 	}
 
 	/**
@@ -56,7 +90,7 @@ public class Configuration {
 	 *            the containerAddress to set
 	 */
 	public void setContainerAddress(String containerAddress) {
-		Configuration.containerAddress = containerAddress;
+		this.properties.setProperty("otdp.container.address", containerAddress);
 	}
 
 	/**
