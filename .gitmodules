@@ -1,0 +1,3 @@
+[submodule "vinothek"]
+	path = vinothek
+	url = git://github.com/OpenTOSCA/vinothek
