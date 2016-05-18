@@ -181,6 +181,8 @@ public class DeployProvisionTask implements Runnable {
 
 		for (String foundCsarId : csarIds) {
 			if (fileName.equals(foundCsarId)) {
+				this.currentState.setCurrentState(State.CSARDEPLOYED);
+				this.currentState.setCurrentMessage("Deployed CSAR, starting provisioning.");
 				csarId = foundCsarId;
 			}
 		}
@@ -244,6 +246,7 @@ public class DeployProvisionTask implements Runnable {
 				try {
 					instantiationServlet.doGet(vinoAppInstantiationRequest,
 							vinoAppInstantiationResponse);
+					this.currentState.setCurrentMessage("Sent provisioning request, waiting for callback..");
 				} catch (ServletException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
