@@ -316,26 +316,30 @@ public class DeployProvisionTask implements Runnable {
 
 					switch (childElement.getLocalName()) {
 					case "sshKey":
+					case "VMPrivateKey":
 						inputParam = this.currentState.getSshPrivateKey();
 						break;
 					case "accessKey":
+					case "HypervisorUserName":
 						inputParam = this.currentState.getAccesKey();
 						break;
 					case "regionEndpoint":
+					case "HypervisorEndpoint":
 						inputParam = this.currentState.getRegionEndpoint();
 						break;
 					case "secretKey":
+					case "HypervisorUserPassword":
 						inputParam = this.currentState.getSecretKey();
 						break;
 					case "keyPairName":
+					case "VMKeyPairName":
 						inputParam = this.currentState.getKeyPairName();
-						break;
+						break;	
 					default:
 						break;
 					}
 
-					if (inputDataValue.contains("Please fill in")
-							&& inputParam != null && !inputParam.isEmpty()) {
+					if (inputDataValue.contains("Please fill in") && inputParam != null && !inputParam.isEmpty()) {
 						childElement.setTextContent(inputParam);
 					}
 				}

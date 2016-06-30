@@ -24,11 +24,11 @@
 	<p>
 	
 	<form id="deployAndInstantiateForm" action="." method="post" enctype="multipart/form-data">
-		SSHPrivateKey: <textarea form="deployAndInstantiateForm" name="sshPrivateKey" rows="1"></textarea><br /> 
-		KeyPairName: <input type="text" name="keyPairName" value="${it.keyPairName}" /><br />
-		AccessKey: <input type="text" name="accessKey" value="${it.accessKey}" /><br />
-		RegionEndpoint: <input type="text" name="regionEndpoint" value="${it.regionEndpoint}" /><br /> 
-		SecretKey: <input type="text" name="secretKey" value="${it.secretKey}" /><br /> 
+		SSHPrivateKey/VMPrivateKey: <textarea form="deployAndInstantiateForm" name="sshPrivateKey" rows="1"></textarea><br /> 
+		KeyPairName/VMKeyPairName: <input type="text" name="keyPairName" value="${it.keyPairName}" /><br />
+		AccessKey/HypervisorUserName: <input type="text" name="accessKey" value="${it.accessKey}" /><br />
+		RegionEndpoint/HypervisorEndpoint: <input type="text" name="regionEndpoint" value="${it.regionEndpoint}" /><br /> 
+		SecretKey/HypervisorUserPassword: <input type="text" name="secretKey" value="${it.secretKey}" /><br /> 
 		CSAR Address: <input type="text" name="csarAddress" /><br /> 
 		<input type="submit" value="Upload" /><br />
 	</form>
